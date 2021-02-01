@@ -5,6 +5,7 @@ import IconFE from 'react-native-vector-icons/Feather'
 import IconFA from 'react-native-vector-icons/FontAwesome'
 import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 import {connect} from 'react-redux'
+import {I18n} from 'react-redux-i18n'
 
 import UnderConstruction from './containers/UnderConstruction'
 import Wallet from './containers/Wallet/Wallet'
@@ -63,11 +64,11 @@ class TabNavigator extends Component {
 					}
 				}}
 			>
-				<Tab.Screen name="Home" component={Wallet} initialParams={{showToast: this.showToast}} />
-				<Tab.Screen name="Contacts" component={Contact} initialParams={{showToast: this.showToast}}/>
-				<Tab.Screen name="Activity" component={UnderConstruction} />
-				<Tab.Screen name="Transfer" component={UnderConstruction} />
-				<Tab.Screen name="Options" component={Options} />
+				<Tab.Screen name="Home" component={Wallet} options={{title: I18n.t('tab.home')}} initialParams={{showToast: this.showToast}} />
+				<Tab.Screen name="Contacts" component={Contact} options={{title: I18n.t('tab.contacts')}} initialParams={{showToast: this.showToast}}/>
+				<Tab.Screen name="Activity" component={UnderConstruction} options={{title: I18n.t('tab.activity')}} />
+				<Tab.Screen name="Transfer" component={UnderConstruction} options={{title: I18n.t('tab.transfer')}} />
+				<Tab.Screen name="Options" component={Options} options={{title: I18n.t('tab.options')}} />
 			</Tab.Navigator>
 		)
 	}

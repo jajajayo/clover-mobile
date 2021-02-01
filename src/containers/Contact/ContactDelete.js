@@ -13,19 +13,19 @@ class ContactDelete extends Component {
 		this.state = {
 			contact: null,
 		}
-		this.showToast = this.props.showToast
 	}
 
 	deleteContact = async () => {
-		await this.props.deleteContact({
-			_id: this.props.contact._id
-		})
-		this.showToast({ title: 'Contacto Borrado' }, 'success')
-		this.cancel()
+		console.log(this.props.selected)
+		await this.props.deleteContact({ _id: this.props.selected._id })
+		if (this.props.contact.payload.success) {
+			this.props.removeItem4List(this.props.selected.index)
+			this.cancel(false)
+		}
 	}
 
-	cancel = () => {
-		this.props.cancel()
+	cancel = (showModal = true) => {
+		this.props.cancel(showModal)
 	}
 
 	render() {

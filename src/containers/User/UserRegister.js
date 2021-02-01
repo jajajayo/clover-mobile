@@ -38,15 +38,12 @@ class Register extends Component {
 			numberPhone: this.state.numberPhone,
 			password: this.state.password
 		}
-		const errors = validate(sendData, this.showToast)
+		const errors = validate(sendData)
 		if (errors.length == 0) {
 			await this.props.create(sendData)
 			
 			if (this.props.user.payload.success) {
-				this.showToast({ title: 'Ha sido registrado exitosamente \nBienvenid@' }, 'success')
 				this.props.navigation.reset({ index: 0, routes: [{ name: 'Dashboard' }] })
-			} else {
-				this.showToast({ title: 'No se pudo registrar' }, 'danger')
 			}
 		}
 	}
@@ -65,6 +62,7 @@ class Register extends Component {
 		const errors = validate(sendData, this.showToast)
 		if (errors.length == 0) {
 			await this.props.requestRegistrationCode({
+				email: this.state.email,
 				numberPhone: this.state.numberPhone
 			})
 			if (this.props.user.payload.success) {
@@ -75,10 +73,8 @@ class Register extends Component {
 						requestRegistrationCode: this.requestRegistrationCode
 					})
 				} else {
-					this.showToast({ title: 'Se ha reenviado el mensaje con el código' }, 'success')
+					this.showToast({ title: I18n.t('registerVerification.resendCodeMsg') }, 'success')
 				}
-			} else {
-				this.showToast({ title: 'Error, no se ha podido enviar el código para el registro' }, 'danger')
 			}
 		}
 	}

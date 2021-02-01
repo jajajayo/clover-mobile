@@ -37,10 +37,11 @@ class AppNavigator extends Component {
 	render() {
 		const user = this.props.user.isLoading
 		const cryptocoin = this.props.cryptocoin.isLoading
+		const contact = this.props.contact.isLoading
 		
 		return (
 			<>
-				{(user || cryptocoin) &&
+				{(user || cryptocoin || contact) &&
 					<LoadingModal />
 				}
 				<NavigationContainer screenProps={{test: this.test}}>
@@ -67,5 +68,6 @@ class AppNavigator extends Component {
 export default 
 	connect(state => ({
 		user: state.user,
-		cryptocoin: state.cryptocoin
+		cryptocoin: state.cryptocoin,
+		contact: state.contact
 	}))(AppNavigator)

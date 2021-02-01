@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AlertMessage from '../../helpers/AlertMessage'
 import axios from '../../helpers/Interceptor'
 import {contactActionType} from '../actions'
 
@@ -23,22 +23,19 @@ export const contactActions = {
 			} else {
 				await dispatch({ type: contactActionType.ERROR_CONTACT, payload: data })
 			}
+			AlertMessage(data.message)
 		}
 	},
 	update: (_data) => {
 		return async dispatch => {
-			const localData = JSON.parse(await AsyncStorage.getItem('contact'))
-			const token = localData.token
 			await dispatch({type:contactActionType.UPDATE_CONTACT,payload:{}})
-			const {data} = await axios.put('contact/update-profile', _data)
+			const {data} = await axios.put('contact/update', _data)
 			if(data.success){
-				await AsyncStorage.removeItem('contact')
-				axios.defaults.headers.common.Authorization = token
-				await AsyncStorage.setItem('contact', JSON.stringify({...data.data, token: token}))
 				await dispatch({ type: contactActionType.SUCCESS_CONTACT, payload: data })
 			}else{
-				await dispatch({ type: contactActionType.ERROR_CONTACT, payload: data, localData: localData })
+				await dispatch({ type: contactActionType.ERROR_CONTACT, payload: data })
 			}
+			AlertMessage(data.message)
 		}
 	},
 	delete: (_data) => {
@@ -50,6 +47,7 @@ export const contactActions = {
 			} else {
 				await dispatch({ type: contactActionType.ERROR_CONTACT, payload: data })
 			}
+			AlertMessage(data.message)
 		}
 	},
 }

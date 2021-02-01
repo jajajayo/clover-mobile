@@ -66,7 +66,7 @@ const fields = {
 	}
 }
 
-export const validate = (data, showToast, required = {}) => {
+export const validate = (data, required = {}) => {
 	let exclude = []
 
 	if (required) {
@@ -86,7 +86,7 @@ export const validate = (data, showToast, required = {}) => {
 	const schema = new Schema(values)
 	const errors = schema.validate(data)
 	if (errors.length > 0) {
-		validation.setErrors(errors, showToast, exclude)
+		validation.setErrors(errors, exclude)
 	}
 	return errors
 }

@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 
-import { userActions } from '../../../src/redux/user/actions'
+import { validate } from './Validate'
+import { contactActions } from '../../../src/redux/contact/actions'
 import MyTextInput from '../../components/MyTextInput'
 import MyButton from '../../components/MyButton'
 
@@ -13,14 +14,35 @@ class ContactEdit extends Component {
 		this.state = {
 			contact: null,
 		}
+		this.showToast = this.props.showToast
 	}
 
 	cancel = () => {
 		this.props.cancel()
 	}
 
+	updateContact = async () => {
+		if (this.state.email.toLowerCase() != this.props.selected.idContact.email.toLowerCase()) {
+			const sendData = { email: this.state.email }
+			const errors = validate(sendData, this.showToast)
+			if (errors.length == 0) {
+				await this.props.updateContact({
+					_id: this.props.selected._id,
+					...sendData
+				})
+				
+				if (this.props.contact.payload.success) {
+					this.props.updateItem2List(this.props.contact.payload.data, this.props.selected.index)
+					this.props.cancel(false)
+				}
+			}
+		} else {
+			this.showToast({ title: I18n.t('contact.selectDiferentEmail') }, 'danger')
+		}
+	}
+
 	render() {
-		const contact = this.props.contact
+		const contact = this.props.selected.idContact
 		return (
 			<View style={{padding: 40, paddingBottom:0}}>
 				<Text style={{fontSize:22, color:'gray'}}>{I18n.t('contact.edit')}</Text>
@@ -32,7 +54,7 @@ class ContactEdit extends Component {
 				<Text style={{...styles.textContactInfo, marginTop: 5}}>{contact.country}</Text>
 				<View style={{flexDirection:'row', marginTop: 20, justifyContent:'center'}}>
 					<MyButton bordered containerStyle={{width:'43%', marginRight:'3%'}} success onPress={this.cancel} text={I18n.t('cancel')} />
-					<MyButton containerStyle={{width:'43%', marginRight:'3%'}} success onPress={this.requestRegistrationCode} text={I18n.t('save')} />
+					<MyButton containerStyle={{width:'43%', marginRight:'3%'}} success onPress={this.updateContact} text={I18n.t('save')} />
 				</View>
 			</View>
 		);
@@ -48,8 +70,8 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user }),
+connect(state => ({ contact: state.contact }),
 	dispatch => ({
-		create: (data) => dispatch(userActions.create(data))
+		updateContact: (data) => dispatch(contactActions.update(data))
 	})
 )(ContactEdit);

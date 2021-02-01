@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Alert } from 'react-native';
-import { Container, Header, Content, Item, Input, Icon, Label, Button, Form } from 'native-base';
+import { StyleSheet, Text } from 'react-native';
+import { Container, Content } from 'native-base';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 
@@ -30,21 +30,21 @@ class UserRegistrationCode extends Component {
 			
 			if (this.props.user.payload.success) {
 				this.props.route.params.create()
-			} else {
-				alert('Error, código incorrecto')
 			}
 		}
 	}
 
 	render() {
 		return (
-			<Content padder>
-				<Text style={styles.subTitle}>{I18n.t('registerVerification.weHaveSentCode')}</Text>
-				<MyTextInput onChangeText={(v) => this.setState({ code:v })} placeholder={I18n.t('registerVerification.code')} />
-				<MyButton containerStyle={{marginTop: 20}} success onPress={this.checkRegistrationCode} text={I18n.t('registerVerification.verify')} />
-				<MyLink onPress={() => this.props.route.params.requestRegistrationCode(false)} text={I18n.t('registerVerification.sendAgain')} containerStyle={{alignSelf:'center', marginTop: '5%'}} textStyle={{color:'red'}} />
-				<Text style={styles.bottomText}>{I18n.t('registerVerification.pleaseWait')}</Text>
-			</Content>
+			<Container>
+				<Content padder>
+					<Text style={styles.subTitle}>{I18n.t('registerVerification.weHaveSentCode')}</Text>
+					<MyTextInput onChangeText={(v) => this.setState({ code:v })} placeholder={I18n.t('registerVerification.code')} />
+					<MyButton containerStyle={{marginTop: 20}} success onPress={this.checkRegistrationCode} text={I18n.t('registerVerification.verify')} />
+					<MyLink onPress={() => this.props.route.params.requestRegistrationCode(false)} text={I18n.t('registerVerification.sendAgain')} containerStyle={{alignSelf:'center', marginTop: '5%'}} textStyle={{color:'red'}} />
+					<Text style={styles.bottomText}>{I18n.t('registerVerification.pleaseWait')}</Text>
+				</Content>
+			</Container>
 		);
 	}
 }

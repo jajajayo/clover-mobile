@@ -16,20 +16,17 @@ class ContactAdd extends Component {
 		this.state = {
 			email: ''
 		}
-		this.showToast = this.props.showToast
 	}
 
 	create = async () => {
 		const sendData = { email: this.state.email }
-		const errors = validate(sendData, this.showToast)
+		const errors = validate(sendData)
 		if (errors.length == 0) {
 			await this.props.create(sendData)
 			
 			if (this.props.contact.payload.success) {
-				this.showToast({ title: I18n.t('contact.addSuccess') }, 'success')
+				this.props.addItem2List(this.props.contact.payload.data)
 				this.props.cancel(false)
-			} else {
-				this.showToast({ title: I18n.t('contact.addFailed') }, 'danger')
 			}
 		}
 	}
@@ -46,7 +43,7 @@ class ContactAdd extends Component {
 
 	render() {
 		return (
-			<ScrollView>
+			<ScrollView keyboardShouldPersistTaps='always'>
 				<View style={{padding: 40, paddingBottom:0}}>
 					<Text style={{fontSize:22, color:'gray'}}>{I18n.t('contact.add')}</Text>
 

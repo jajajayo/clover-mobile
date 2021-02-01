@@ -5,7 +5,7 @@ export const cryptocoinActions = {
 	list: (_data) => {
 		return async dispatch => {
 			await dispatch({type:cryptocoinActionType.LIST_CRYPTOCOIN,payload:{}})
-			const {data} = await axios.get('criptocoin/list')
+			const {data} = await axios.get('cryptocoin/list')
 			if (data.success) {
 				await dispatch({ type: cryptocoinActionType.SUCCESS_CRYPTOCOIN, payload: data })
 			} else {

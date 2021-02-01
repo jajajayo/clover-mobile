@@ -1,6 +1,6 @@
-import { Alert } from 'react-native'
+import Toast from './Toast'
 export const validation = {
-	setErrors: (errors, showToast, exclude) => {
+	setErrors: (errors, exclude) => {
 		let errorMessage = ''
 		for (let i = 0; i < errors.length; i ++) {
 			if (!exclude.includes(errors[i].path)) {
@@ -8,8 +8,8 @@ export const validation = {
 				errorMessage += errors[i].message
 			}
 		}
-		//Alert.alert('Error en el formulario', errorMessage)
-		showToast({
+		
+		Toast({
 			title: errorMessage
 		}, 'danger')
 	},

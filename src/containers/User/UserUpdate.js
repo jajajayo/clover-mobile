@@ -41,7 +41,7 @@ class UserUpdate extends Component {
 		}
 
 		const required = { password: false }
-		const errors = validate(sendData, this.showToast, required)
+		const errors = validate(sendData, required)
 		if (errors.length == 0) {
 			await this.props.update({
 				_id: this.props.user?.localData._id,
@@ -49,9 +49,6 @@ class UserUpdate extends Component {
 			})
 			
 			if (this.props.user.payload.success) {
-				this.showToast({ title: I18n.t('userUpdate.success') }, 'success')
-			} else {
-				this.showToast({ title: I18n.t('userUpdate.failed') }, 'danger')
 			}
 		}
 	}

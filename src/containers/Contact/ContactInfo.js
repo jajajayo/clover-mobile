@@ -14,7 +14,7 @@ class ContactInfo extends Component {
 	}
 
 	render() {
-		const contact = this.props.contact.idContact
+		const contact = (this.props.contact.idContact) ? this.props.contact.idContact : {}
 		return (
 			<>
 				<View style={styles.modalHeader}>

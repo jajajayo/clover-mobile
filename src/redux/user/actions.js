@@ -1,3 +1,4 @@
+import AlertMessage from '../../helpers/AlertMessage'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from '../../helpers/Interceptor'
 import {userActionType} from '../actions'
@@ -28,6 +29,7 @@ export const userActions = {
 			} else {
 				await dispatch({ type: userActionType.ERROR_USER, payload: data })
 			}
+			AlertMessage(data.message)
 		}
 	},
 	logout: (_data) => {
@@ -49,6 +51,7 @@ export const userActions = {
 			} else {
 				await dispatch({ type: userActionType.ERROR_USER, payload: data })
 			}
+			AlertMessage(data.message)
 		}
 	},
 	update: (_data) => {
@@ -65,6 +68,7 @@ export const userActions = {
 			}else{
 				await dispatch({ type: userActionType.ERROR_USER, payload: data, localData: localData })
 			}
+			AlertMessage(data.message)
 		}
 	},
 	requestRegistrationCode: (_data) => {
@@ -76,6 +80,7 @@ export const userActions = {
 			}else{
 				await dispatch({type:userActionType.ERROR_USER,payload:data})
 			}
+			AlertMessage(data.message)
 		}
 	},
 	checkRegistrationCode: (_data) => {
@@ -87,6 +92,7 @@ export const userActions = {
 			}else{
 				await dispatch({type:userActionType.ERROR_USER,payload:data})
 			}
+			AlertMessage(data.message)
 		}
 	},
 	/*getUserLocation: (_data) => {

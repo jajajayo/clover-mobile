@@ -33,7 +33,7 @@ class Login extends Component {
 			email: this.state.email,
 			password: this.state.password
 		}
-		const errors = validate(sendData, this.showToast)
+		const errors = validate(sendData)
 		if (errors.length == 0) {
 			await this.props.login({
 				email: this.state.email,
@@ -41,10 +41,10 @@ class Login extends Component {
 			})
 			
 			if (this.props.user.payload.success) {
-				this.showToast({ title: 'Bienvenid@\nHa iniciado sesión correctamente' }, 'success')
+				//this.showToast({ title: 'Bienvenid@\nHa iniciado sesión correctamente' }, 'success')
 				this.props.navigation.reset({ index: 0, routes: [{ name: 'Dashboard' }] })
 			} else {
-				this.showToast({ title: 'Usuario o contraseña incorrecta' }, 'danger')
+				//this.showToast({ title: 'Usuario o contraseña incorrecta' }, 'danger')
 			}
 		}
 	}
