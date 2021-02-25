@@ -1,5 +1,5 @@
 import firebase, { notifications } from 'react-native-firebase'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const CHANNEL_NOTIFICATIONS = {
 	CHANNEL_ID: 'test_id',
 	CHANNEL_NAME: 'test_name',
@@ -14,10 +14,11 @@ const channel = new firebase.notifications.Android.Channel(
 firebase.notifications().android.createChannel(channel);
 
 
-async function getToken() {
+export const getToken = async () => {
 	const fcmToken = await firebase.messaging().getToken();
 	if (fcmToken) {
-		console.log('token', fcmToken)
+		console.log('token: ', fcmToken)
+		return fcmToken
 	}
 };
 
@@ -44,19 +45,21 @@ async function checkPermission() {
 
 async function createNotificationListeners() {
 	// This listener triggered when notification has been received in foreground
-	firebase.notifications().onNotification((notification) => {
-		const { title, body } = notification;
-		const {
-			notifications: {
-				Android: {
-					Priority: { Max }
+	firebase.notifications().onNotification(async (notification) => {
+		if (await AsyncStorage.getItem('user')) {
+			const { title, body } = notification;
+			const {
+				notifications: {
+					Android: {
+						Priority: { Max }
+					}
 				}
-			}
-		} = firebase;
-		notification.android.setChannelId(CHANNEL_NOTIFICATIONS.CHANNEL_ID);
-		notification.android.setPriority(Max);
-		notification.setData(notification.data);
-		firebase.notifications().displayNotification(notification);
+			} = firebase;
+			notification.android.setChannelId(CHANNEL_NOTIFICATIONS.CHANNEL_ID);
+			notification.android.setPriority(Max);
+			notification.setData(notification.data);
+			firebase.notifications().displayNotification(notification);
+		}
 	});
 	
 	/*// This listener triggered when app is in backgound and we click, tapped and opened notifiaction

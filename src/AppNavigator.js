@@ -11,6 +11,7 @@ import UserRegister from './containers/User/UserRegister'
 import UserRegistrationCode from './containers/User/UserRegistrationCode'
 import UserUpdate from './containers/User/UserUpdate'
 import LoadingModal from './components/LoadingModal'
+import WalletSeeder from './containers/Wallet/WalletSeeder'
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,7 @@ class AppNavigator extends Component {
 						<Stack.Screen name="UserRegister" component={UserRegister} options={{ title: I18n.t('register.title') }} initialParams={{showToast: this.showToast}} />
 						<Stack.Screen name="UserRegistrationCode" component={UserRegistrationCode} options={{ title: I18n.t('registerVerification.title') }} initialParams={{showToast: this.showToast}} />
 						<Stack.Screen name="UserUpdate" component={UserUpdate} options={{ title: I18n.t('userUpdate.title') }} initialParams={{showToast: this.showToast}} />
+						<Stack.Screen name="WalletSeeder" component={WalletSeeder} options={{ title: I18n.t('wallet.titleSeeder') }} initialParams={{showToast: this.showToast}} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</>

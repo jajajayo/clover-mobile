@@ -1,6 +1,7 @@
 package com.clover;
 
 import com.facebook.react.ReactActivity;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends ReactActivity {
 
@@ -10,6 +11,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+    FirebaseMessaging.getInstance().subscribeToTopic("all");
     return "clover";
   }
 }

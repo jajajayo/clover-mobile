@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/dist/Feather'
 
 import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
 import CardWallet from '../../components/CardWallet'
+import ListCard from '../../components/ListCard'
 import MyTextInput from '../../components/MyTextInput'
+import MyButton from '../../components/MyButton'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class Wallet extends Component {
@@ -33,7 +35,7 @@ class Wallet extends Component {
 
 					<View style={{width:'100%', flexDirection:'row'}}>
 						<View style={{width:'50%', alignItems:'center'}}>
-							<TouchableOpacity style={styles.arrow}>
+							<TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('WalletSeeder')}>
 								<Icon name='arrow-up' size={70} color='white' />
 							</TouchableOpacity>
 							<Text style={{fontSize:20}}>{I18n.t('wallet.send')}</Text>
@@ -48,6 +50,14 @@ class Wallet extends Component {
 
 					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>$0.00</Text>
 					<Text style={{fontSize:24, color:'gray', padding:10, marginLeft:10}}>{I18n.t('wallet.title')}</Text>
+
+					{/*<View style={{padding:10}}>
+						<TouchableOpacity style={styles.addWallet}>
+							<Icon name='plus' size={25} color='white' />
+							<Text style={{fontSize:16, color:'white', paddingLeft:5}}>{I18n.t('wallet.addWallet')}</Text>
+						</TouchableOpacity>
+					</View>*/}
+					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.props.navigation.navigate('WalletSeeder')} />
 					{this.state.cryptocoins.map((cryptocoin, index) => (
 						<CardWallet key={index} data={cryptocoin} />
 					))}
@@ -99,6 +109,14 @@ const styles = StyleSheet.create({
 		borderRadius: 90,
 		width: 90,
 		height: 90
+	},
+	addWallet: {
+		borderRadius: 6,
+		backgroundColor: 'green',
+		padding: 10,
+		alignSelf:'flex-end',
+		flexDirection:'row',
+		alignItems: 'center'
 	}
 });
 

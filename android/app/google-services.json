@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "11212551301",
-    "project_id": "clover-mobile-df921",
-    "storage_bucket": "clover-mobile-df921.appspot.com"
+    "project_number": "670221999935",
+    "project_id": "clover-92a52",
+    "storage_bucket": "clover-92a52.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:11212551301:android:3ef3731e7ace2d1296e5ec",
+        "mobilesdk_app_id": "1:670221999935:android:e63bce3cbd550e6ff4bd8a",
         "android_client_info": {
           "package_name": "com.clover"
         }
       },
       "oauth_client": [
         {
-          "client_id": "11212551301-j2r2tki1bpt9au5rhg6i8j3tk2sdajr9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.clover",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "11212551301-lff32is1ijqtcridgk3tnrmoj08ehmlu.apps.googleusercontent.com",
+          "client_id": "670221999935-tijvglc0gn335nksoaduvtlavosfgmfb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCcySDZc_Suarm5snThBV7P3Nn7S2AACQM"
+          "current_key": "AIzaSyA5wDxY6zFSnxmeV4alJxCbMiDVyX_LKVM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "11212551301-lff32is1ijqtcridgk3tnrmoj08ehmlu.apps.googleusercontent.com",
+              "client_id": "670221999935-tijvglc0gn335nksoaduvtlavosfgmfb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

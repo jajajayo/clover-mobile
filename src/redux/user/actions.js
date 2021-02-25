@@ -2,6 +2,7 @@ import AlertMessage from '../../helpers/AlertMessage'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from '../../helpers/Interceptor'
 import {userActionType} from '../actions'
+import {getToken} from '../../helpers/PushNotification'
 
 export const userActions = {
 	getLocalData: () => {
@@ -21,6 +22,7 @@ export const userActions = {
 		return async dispatch => {
 			await dispatch({ type:userActionType.LOGIN_USER,payload: {} })
 			await AsyncStorage.removeItem('user')
+			_data.firebaseToken = await getToken()
 			const {data} = await axios.post('user/login', _data)
 			if (data.success) {
 				axios.defaults.headers.common.Authorization = data.data.token

@@ -16,6 +16,8 @@ export const languages = {
 		saveChanges: 'Guardar Cambios',
 		save: 'Guardar',
 		delete: 'Eliminar',
+		copy: 'Copiar',
+		showQR: 'Mostrar QR',
 		tab: {
 			home: 'Home',
 			contacts: 'Contactos',
@@ -88,7 +90,11 @@ export const languages = {
 		wallet: {
 			title: 'BILLETERAS',
 			send: 'Enviar',
-			receive: 'Recibir'
+			receive: 'Recibir',
+			titleSeeder: 'Frase de recuperación',
+			subTitleSeeder: 'Escribe o copia estas palabras en el orden correcto y guardalas en un lugar seguro',
+			dontShare: 'Nunca compartas la frase de recuperación con nadie, ¡guardala segura!',
+			addWallet: 'Agregar billetera'
 		}
 	},
 	en: {
@@ -107,6 +113,8 @@ export const languages = {
 		saveChanges: 'Save Changes',
 		save: 'Save',
 		delete: 'Delete',
+		copy: 'Copy',
+		showQR: 'Show QR',
 		tab: {
 			home: 'Home',
 			contacts: 'Contacts',
@@ -179,7 +187,11 @@ export const languages = {
 		wallet: {
 			title: 'WALLETS',
 			send: 'Enviar',
-			receive: 'Recibir'
+			receive: 'Recibir',
+			titleSeeder: 'Recovery phrase',
+			subTitleSeeder: 'Write or copy these words in the correct order and keep them in a safe place',
+			dontShare: 'Never share the recovery phrase with anyone, keep it safe!',
+			addWallet: 'Add Wallet'
 		}
 	}
 }

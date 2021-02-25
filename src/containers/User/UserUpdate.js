@@ -27,7 +27,6 @@ class UserUpdate extends Component {
 			countries: this.props.country.payload ? this.props.country.payload.data : [],
 			loaded: false
 		}
-		this.showToast = this.props.route.params.showToast
 	}
 
 	update = async () => {
