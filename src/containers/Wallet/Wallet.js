@@ -6,6 +6,7 @@ import {I18n} from 'react-redux-i18n'
 import Icon from 'react-native-vector-icons/dist/Feather'
 
 import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
+import { userActions } from '../../../src/redux/user/actions'
 import CardWallet from '../../components/CardWallet'
 import ListCard from '../../components/ListCard'
 import MyTextInput from '../../components/MyTextInput'
@@ -17,15 +18,48 @@ class Wallet extends Component {
 		super(props);
 		this.state = {
 			cryptocoins: [],
+			userCryptocoins: []
 		}
 		this.showToast = this.props.route.params.showToast
 	}
 
 	async componentDidMount() {
 		await this.props.getListCryptocoins()
+		
 		if (this.props.cryptocoin.payload.success) {
-			this.setState({ cryptocoins: this.props.cryptocoin.payload.data })
+			this.setWallet()
 		}
+	}
+
+	walletSelect = (typeOperation) => {
+		this.props.navigation.navigate('WalletSelect', {
+			cryptocoins: this.state.cryptocoins,
+			setNewWallet: this.setNewWallet,
+			typeOperation: typeOperation
+		})
+	}
+
+	setWallet = async (cryptoRedux = true) => {
+		let cryptocoins = (cryptoRedux) ? this.props.cryptocoin.payload?.data : this.state.cryptocoins
+		let userCryptocoins =  this.props.user?.localData?.cryptocoins
+		if (cryptocoins && cryptocoins?.length) {
+			if (userCryptocoins && userCryptocoins?.length) {
+				cryptocoins.map(cryptocoin => {
+					const ifExists = userCryptocoins.find(ele => ele.idCryptocoin == cryptocoin._id)
+					if (ifExists) {
+						cryptocoin.walletUser = ifExists.wallet
+					}
+				})
+			}
+		}
+		this.setState({
+			cryptocoins: cryptocoins
+		})
+	}
+
+	setNewWallet = async () => {
+		await this.props.getLocalData()
+		this.setWallet(false)
 	}
 
 	render() {
@@ -35,7 +69,7 @@ class Wallet extends Component {
 
 					<View style={{width:'100%', flexDirection:'row'}}>
 						<View style={{width:'50%', alignItems:'center'}}>
-							<TouchableOpacity style={styles.arrow} onPress={() => this.props.navigation.navigate('WalletSeeder')}>
+							<TouchableOpacity style={styles.arrow} onPress={() => this.walletSelect('send')}>
 								<Icon name='arrow-up' size={70} color='white' />
 							</TouchableOpacity>
 							<Text style={{fontSize:20}}>{I18n.t('wallet.send')}</Text>
@@ -51,16 +85,14 @@ class Wallet extends Component {
 					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>$0.00</Text>
 					<Text style={{fontSize:24, color:'gray', padding:10, marginLeft:10}}>{I18n.t('wallet.title')}</Text>
 
-					{/*<View style={{padding:10}}>
-						<TouchableOpacity style={styles.addWallet}>
-							<Icon name='plus' size={25} color='white' />
-							<Text style={{fontSize:16, color:'white', paddingLeft:5}}>{I18n.t('wallet.addWallet')}</Text>
-						</TouchableOpacity>
-					</View>*/}
-					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.props.navigation.navigate('WalletSeeder')} />
-					{this.state.cryptocoins.map((cryptocoin, index) => (
-						<CardWallet key={index} data={cryptocoin} />
-					))}
+					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.walletSelect('addWallet')} />
+					{this.state.cryptocoins && this.state.cryptocoins?.length > 0 &&
+						this.state.cryptocoins.map((cryptocoin, index) => {
+							if (cryptocoin.walletUser) {
+								return <CardWallet key={index} data={cryptocoin} />
+							}
+						})
+					}
 				</Content>
 			</Container>
 		);
@@ -123,6 +155,7 @@ const styles = StyleSheet.create({
 export default
 connect(state => ({ user: state.user, cryptocoin: state.cryptocoin }),
 	dispatch => ({
-		getListCryptocoins: () => dispatch(cryptocoinActions.list())
+		getListCryptocoins: () => dispatch(cryptocoinActions.list()),
+		getLocalData: () => dispatch(userActions.getLocalData())
 	})
 )(Wallet);

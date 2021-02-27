@@ -12,6 +12,8 @@ import UserRegistrationCode from './containers/User/UserRegistrationCode'
 import UserUpdate from './containers/User/UserUpdate'
 import LoadingModal from './components/LoadingModal'
 import WalletSeeder from './containers/Wallet/WalletSeeder'
+import WalletSelect from './containers/Wallet/WalletSelect'
+import WalletSend from './containers/Wallet/WalletSend'
 
 const Stack = createStackNavigator();
 
@@ -39,6 +41,7 @@ class AppNavigator extends Component {
 		const user = this.props.user.isLoading
 		const cryptocoin = this.props.cryptocoin.isLoading
 		const contact = this.props.contact.isLoading
+		const transaction = this.props.transaction.isLoading
 		
 		return (
 			<>
@@ -60,6 +63,8 @@ class AppNavigator extends Component {
 						<Stack.Screen name="UserRegistrationCode" component={UserRegistrationCode} options={{ title: I18n.t('registerVerification.title') }} initialParams={{showToast: this.showToast}} />
 						<Stack.Screen name="UserUpdate" component={UserUpdate} options={{ title: I18n.t('userUpdate.title') }} initialParams={{showToast: this.showToast}} />
 						<Stack.Screen name="WalletSeeder" component={WalletSeeder} options={{ title: I18n.t('wallet.titleSeeder') }} initialParams={{showToast: this.showToast}} />
+						<Stack.Screen name="WalletSelect" component={WalletSelect} options={{ title: I18n.t('wallet.selectACryptocoin') }} />
+						<Stack.Screen name="WalletSend" component={WalletSend} options={{ title: I18n.t('send') }} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</>
@@ -71,5 +76,6 @@ export default
 	connect(state => ({
 		user: state.user,
 		cryptocoin: state.cryptocoin,
-		contact: state.contact
+		contact: state.contact,
+		transaction: state.transaction
 	}))(AppNavigator)

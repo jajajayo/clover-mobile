@@ -30,6 +30,12 @@ module.exports = function (message) {
 		'contactUpdateSuccess': { description: I18n.t('contact.updateSuccess'), type: 'success' },
 		'contactUpdateFailed': { description: I18n.t('contact.updateFailed'), type: 'danger' },
 		'contactDeleteSuccess': { description: I18n.t('contact.deleteSuccess'), type: 'success' },
+		//WALLET
+		'userSetCryptocoinSuccess': { description: I18n.t('wallet.addSuccess'), type: 'success' },
+		'userSetCryptocoinFailed': { description: I18n.t('wallet.addFailed'), type: 'danger' },
+		//TRANSACTION
+		'transactionSendSuccess': { description: I18n.t('wallet.sendSuccess'), type: 'success' },
+		'transactionSendFailed': { description: I18n.t('wallet.sendFailed'), type: 'danger' },
 	}
 
 	if (errors[message]) {

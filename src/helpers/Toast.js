@@ -9,6 +9,11 @@ export default (props, type = 'default') => {
 		},
 		type: type,
 		position: 'top',
-		duration: 6000
+		duration: 6000,
+		onClose: closeToast.bind(this)
 	})
+}
+
+function closeToast() {
+	Toast.hide()
 }

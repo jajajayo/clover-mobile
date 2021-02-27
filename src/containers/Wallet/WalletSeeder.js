@@ -4,8 +4,10 @@ import { Container, Content, Footer } from 'native-base';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 import Icon from 'react-native-vector-icons/dist/Feather'
+import Toast from '../../helpers/Toast'
 
 import { seederActions } from '../../../src/redux/seeder/actions'
+import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
 import CardWallet from '../../components/CardWallet'
 import MyTextInput from '../../components/MyTextInput'
 import MyButton from '../../components/MyButton'
@@ -47,23 +49,43 @@ class Wallet extends Component {
 		}
 	}
 
-	selectOption = (id, index) => {
+	selectOption = (seeder, index) => {
 		let {selectedOptions} = this.state 
 		if (selectedOptions[index]?.value) {
 			selectedOptions[index].value = false
-			selectedOptions[index].id = id
 		} else {
 			selectedOptions[index] = {
-				value: true
+				value: true,
+				name: seeder.name
 			}
 		}
 		this.setState({ selectedOptions: selectedOptions })
 		this.forceUpdate()
 	}
 
+	create = async () => {
+		if (this.state.selectedOptions.length == 12) {
+			let seeders = ''
+			this.state.selectedOptions.map((option, i) => {
+				seeders += (option.value) 
+					? ((i > 0) ? ' ' : '') + option.name 
+					: ''
+			})
+			await this.props.create({
+				seeders: seeders,
+				idCryptocoin: this.props.route.params?.selectedCryptocoin?._id
+			})
+			if (this.props.cryptocoin.payload.success) {
+				this.props.route.params.setNewWallet()
+				this.props.navigation.popToTop()
+			}
+		} else {
+			Toast({title: I18n.t('wallet.required')}, 'danger')
+		}
+	}
+
 	render() {
 		const {selectedOptions} = this.state
-		console.log(selectedOptions)
 		return (
 			<Container>
 				<Content contentContainerStyle={{paddingTop:'8%'}} padder>
@@ -71,10 +93,10 @@ class Wallet extends Component {
 					<View style={styles.btnSection}>
 						{this.state.seeders?.length > 0 &&
 							this.state.seeders.map((seeder, index) => (
-								<View style={{padding:5}}>
+								<View key={index} style={{padding:5}}>
 									<TouchableOpacity 
 										style={[styles.seeders, (selectedOptions[index]?.value) ? btnActStyle : btnInactStyle]}
-										onPress={() => this.selectOption(seeder._id, index)}
+										onPress={() => this.selectOption(seeder, index)}
 									>
 										<Text style={[(selectedOptions[index]?.value) ? textActStyle : textInactStyle]}>{(index+1) + ' ' + seeder.name}</Text>
 									</TouchableOpacity>
@@ -97,7 +119,7 @@ class Wallet extends Component {
 				</Content>
 				<Footer style={{backgroundColor:'white', height:100}}>
 					<View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-						<MyButton containerStyle={{width:'95%', padding:5 }} primary onPress={() => this.setAnswerValue('0', surveys, index)} text={I18n.t('continue').toUpperCase()} />
+						<MyButton containerStyle={{width:'95%', padding:5 }} primary onPress={() => this.create()} text={I18n.t('continue').toUpperCase()} />
 					</View>
 				</Footer>
 			</Container>
@@ -136,8 +158,9 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, seeder: state.seeder, seeder: state.seeder }),
+connect(state => ({ user: state.user, seeder: state.seeder, cryptocoin: state.cryptocoin }),
 	dispatch => ({
-		listRandom: () => dispatch(seederActions.listRandom())
+		listRandom: () => dispatch(seederActions.listRandom()),
+		create: (data) => dispatch(cryptocoinActions.create(data))
 	})
 )(Wallet);

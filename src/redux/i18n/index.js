@@ -94,7 +94,15 @@ export const languages = {
 			titleSeeder: 'Frase de recuperación',
 			subTitleSeeder: 'Escribe o copia estas palabras en el orden correcto y guardalas en un lugar seguro',
 			dontShare: 'Nunca compartas la frase de recuperación con nadie, ¡guardala segura!',
-			addWallet: 'Agregar billetera'
+			addWallet: 'Agregar billetera',
+			addSuccess: 'Se ha registrado la billetera exitosamente',
+			addFailed: 'No se ha podido registrar la billetera',
+			required: 'Debes seleccionar las 12 palabras',
+			selectACryptocoin: 'Seleccione una criptomoneda',
+			amount: 'Cantidad',
+			addressee: 'Destinatario',
+			sendSuccess: 'Se ha realizado la transacción exitosamente',
+			sendFailed: 'Ha ocurrido un error con la transacción'
 		}
 	},
 	en: {
@@ -191,7 +199,15 @@ export const languages = {
 			titleSeeder: 'Recovery phrase',
 			subTitleSeeder: 'Write or copy these words in the correct order and keep them in a safe place',
 			dontShare: 'Never share the recovery phrase with anyone, keep it safe!',
-			addWallet: 'Add Wallet'
+			addWallet: 'Add Wallet',
+			addSuccess: 'Wallet added successfully',
+			addFailed: 'The wallet could not be added',
+			required: 'You must select the 12 words',
+			selectACryptocoin: 'Select a cryptocoin',
+			amount: 'Amount',
+			addressee: 'Addressee',
+			sendSuccess: 'The transaction has been carried out successfully',
+			sendFailed: 'An error occurred with the transaction'
 		}
 	}
 }

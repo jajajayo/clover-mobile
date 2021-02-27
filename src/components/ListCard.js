@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
+import {Thumbnail} from 'native-base'
 import Icon from 'react-native-vector-icons/dist/Feather'
 import IconFA from 'react-native-vector-icons/dist/FontAwesome'
 import IconFA5 from 'react-native-vector-icons/dist/FontAwesome5'
@@ -14,6 +15,11 @@ class ListCard extends Component {
 	render() {
 		return (
 			<TouchableOpacity style={styles.container} {...this.props}>
+				{this.props.image && 
+					<View style={{flex:2}}>
+						<Thumbnail style={{width:60}} source={{uri:this.props.image}} />
+					</View>
+				}
 				{this.props.icon && 
 					<View style={{flex:1}}>
 						{(this.props.FontAwesome) 

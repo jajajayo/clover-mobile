@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
 		case cryptocoinActionType.LIST_CRYPTOCOIN:
 			return{ ...state, isLoading: true }
 		break
+		case cryptocoinActionType.CREATE_CRYPTOCOIN:
+			return{ ...state, isLoading: true }
+		break
 		case cryptocoinActionType.SUCCESS_CRYPTOCOIN:
 			return{ ...state, payload: action.payload, isLoading: false }
 		break
