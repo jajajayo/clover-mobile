@@ -45,7 +45,7 @@ class AppNavigator extends Component {
 		
 		return (
 			<>
-				{(user || cryptocoin || contact) &&
+				{(user || cryptocoin || contact || transaction) &&
 					<LoadingModal />
 				}
 				<NavigationContainer screenProps={{test: this.test}}>

@@ -18,7 +18,7 @@ class Wallet extends Component {
 		this.state = {
 			selectedCryptocoin: this.props.route.params?.selectedCryptocoin,
 			amount: '',
-			walletReceive: ''
+			walletReceive: this.props.route.params?.selectedCryptocoin.walletUser,
 		}
 	}
 
@@ -53,7 +53,7 @@ class Wallet extends Component {
 						<Text style={{fontSize:26, marginLeft:10}}>{`${selectedCryptocoin.name} (${selectedCryptocoin.shortName})`}</Text>
 					</View>
 					<Text style={{marginTop:20}}>{selectedCryptocoin.walletUser}</Text>
-					<MyTextInput onChangeText={(walletReceive) => this.setState({ walletReceive })} placeholder={I18n.t('wallet.addressee')} containerStyle={{marginTop:30}} />
+					<MyTextInput onChangeText={(walletReceive) => this.setState({ walletReceive })} placeholder={I18n.t('wallet.addressee')} containerStyle={{marginTop:30}} defaultValue={this.state.walletReceive} />
 					<MyTextInput onChangeText={(amount) => this.setState({ amount })} placeholder={I18n.t('wallet.amount')} containerStyle={{marginTop:20}} />
 				</Content>
 				<Footer style={{backgroundColor:'white', height:100}}>

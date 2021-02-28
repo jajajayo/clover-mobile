@@ -54,3 +54,7 @@ export const transactionActionType = {
 	SUCCESS_TRANSACTION: 'SUCCESS_TRANSACTION',
 	ERROR_TRANSACTION: 'ERROR_TRANSACTION'
 }
+
+export const balanceActionType = {
+	SET_BALANCE: 'SET_BALANCE'
+}

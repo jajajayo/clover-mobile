@@ -63,6 +63,7 @@ class Wallet extends Component {
 	}
 
 	render() {
+		console.log(this.props.balance.payload)
 		return (
 			<Container>
 				<Content contentContainerStyle={{paddingTop:'10%'}}>
@@ -82,7 +83,7 @@ class Wallet extends Component {
 						</View>
 					</View>
 
-					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>$0.00</Text>
+					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>${(this.props.balance.payload) ? this.props.balance.payload.toFixed(2) : 0.00}</Text>
 					<Text style={{fontSize:24, color:'gray', padding:10, marginLeft:10}}>{I18n.t('wallet.title')}</Text>
 
 					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.walletSelect('addWallet')} />
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, cryptocoin: state.cryptocoin }),
+connect(state => ({ user: state.user, cryptocoin: state.cryptocoin, balance: state.balance }),
 	dispatch => ({
 		getListCryptocoins: () => dispatch(cryptocoinActions.list()),
 		getLocalData: () => dispatch(userActions.getLocalData())

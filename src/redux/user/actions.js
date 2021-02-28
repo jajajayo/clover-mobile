@@ -2,6 +2,7 @@ import AlertMessage from '../../helpers/AlertMessage'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from '../../helpers/Interceptor'
 import {userActionType} from '../actions'
+import {balanceActionType} from '../actions'
 import {getToken} from '../../helpers/PushNotification'
 
 export const userActions = {
@@ -9,9 +10,11 @@ export const userActions = {
 		return async dispatch => {
 			await dispatch({type:userActionType.GET_LOGIN_DATA_USER,payload:{}})
 			const data = JSON.parse(await AsyncStorage.getItem('user'))
+			const balance = JSON.parse(await AsyncStorage.getItem('balance'))
 			if (data) {
 				axios.defaults.headers.common.Authorization = data.token
 				await dispatch({ type: userActionType.SUCCESS_USER, localData: data })
+				await dispatch({ type: balanceActionType.SET_BALANCE, payload: balance })
 			} else {
 				await dispatch({ type: userActionType.ERROR_USER, payload: null })
 			}
