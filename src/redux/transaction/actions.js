@@ -24,7 +24,7 @@ export const transactionActions = {
 			/*const a = await axiosOrig.get('http://0ca74df8ab9f.ngrok.io/address/Srjjhfd')
 			console.log(a.data)*/
 			//const transaction = await axiosOrig.post(`${Config.URI_TRANSACTION}/transaction/broadcast`, {
-			const transaction = await axiosOrig.post(`http://16a88a150e3f.ngrok.io/transaction/broadcast`, {
+			const transaction = await axiosOrig.post(`http://192.168.1.3:3001/transaction/broadcast`, {
 				amount: _data.amount,
 				recipient: _data.walletReceive,
 				sender: _data.wallet
@@ -34,7 +34,7 @@ export const transactionActions = {
 			if (transaction?.data?.transaction?.id) {
 				const {data} = await axios.post('transaction/send', {..._data, idTransaction:transaction.data?.transaction?.id})
 				if (data.success) {
-					const socket = await axios.get('transaction/list-socket', { params: { data : {
+					/*const socket = await axios.get('transaction/list-socket', { params: { data : {
 						id:transaction.data?.transaction?.id,
 						amount: _data.amount,
 						recipient: _data.walletReceive,
@@ -43,9 +43,9 @@ export const transactionActions = {
 					let balance = JSON.parse(await AsyncStorage.getItem('balance'))
 					balance += _data.amount
 					await AsyncStorage.setItem('balance', JSON.stringify(balance))
-					//await axiosOrig.get('http://16a88a150e3f.ngrok.io/mine')
+					//await axiosOrig.get('http://16a88a150e3f.ngrok.io/mine')*/
 					await dispatch({ type: transactionActionType.SUCCESS_TRANSACTION, payload: data })
-					await dispatch({ type: balanceActionType.SET_BALANCE, payload: balance })
+					//await dispatch({ type: balanceActionType.SET_BALANCE, payload: balance })
 				} else {
 					await dispatch({ type: transactionActionType.ERROR_TRANSACTION, payload: data })
 				}
