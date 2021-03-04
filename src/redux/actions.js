@@ -58,3 +58,9 @@ export const transactionActionType = {
 export const balanceActionType = {
 	SET_BALANCE: 'SET_BALANCE'
 }
+
+export const walletActionType = {
+	LIST_WALLET: 'LIST_WALLET',
+	SUCCESS_WALLET: 'SUCCESS_WALLET',
+	ERROR_WALLET: 'ERROR_WALLET'
+}

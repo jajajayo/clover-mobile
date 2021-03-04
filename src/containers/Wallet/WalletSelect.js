@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Container, Content, Footer } from 'native-base';
 import { connect } from 'react-redux'
+import Config from 'react-native-config'
 import {I18n} from 'react-redux-i18n'
 import Icon from 'react-native-vector-icons/dist/Feather'
 import Toast from '../../helpers/Toast'
@@ -33,13 +34,17 @@ class WalletSelect extends Component {
 
 	render() {
 		const cryptocoins = this.props.route.params?.cryptocoins
+		const wallet = (this.props.wallet.payload?.success) ? this.props.wallet.payload?.data : []
 		return (
 			<Container>
 				<Content contentContainerStyle={{paddingTop:30}}>
 					{cryptocoins &&
 						cryptocoins.map((crypto, i) => {
-							if ((this.props.route.params.typeOperation == 'addWallet') ? !crypto.walletUser : crypto.walletUser) {
-								return <ListCard key={i} image={'http://192.168.1.20:4007/public/'+crypto.image} title={crypto.name} onPress={() => this.selectCryptocoin(crypto)} />
+							const walletNew = wallet.find(ele => ele._id == crypto._id)
+							if ((this.props.route.params.typeOperation == 'addWallet') 
+									? !walletNew 
+									: walletNew) {
+								return <ListCard key={i} image={Config.URI_PUBLIC+'/'+crypto.image} title={crypto.name} onPress={() => this.selectCryptocoin(this.props.route.params.typeOperation == 'addWallet' ? crypto : walletNew)} />
 							}
 						})
 					}
@@ -80,5 +85,5 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, seeder: state.seeder, cryptocoin: state.cryptocoin })
+connect(state => ({ user: state.user, seeder: state.seeder, cryptocoin: state.cryptocoin, wallet: state.wallet })
 )(WalletSelect);

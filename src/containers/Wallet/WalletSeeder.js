@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { Container, Content, Footer } from 'native-base';
+import { Container, Content, Footer, Spinner } from 'native-base';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 import Icon from 'react-native-vector-icons/dist/Feather'
@@ -8,6 +8,7 @@ import Toast from '../../helpers/Toast'
 
 import { seederActions } from '../../../src/redux/seeder/actions'
 import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
+import { walletActions } from '../../../src/redux/wallet/actions'
 import CardWallet from '../../components/CardWallet'
 import MyTextInput from '../../components/MyTextInput'
 import MyButton from '../../components/MyButton'
@@ -76,7 +77,8 @@ class Wallet extends Component {
 				idCryptocoin: this.props.route.params?.selectedCryptocoin?._id
 			})
 			if (this.props.cryptocoin.payload.success) {
-				this.props.route.params.setNewWallet()
+				//this.props.route.params.setNewWallet()
+				await this.props.listWallet()
 				this.props.navigation.popToTop()
 			}
 		} else {
@@ -158,9 +160,10 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, seeder: state.seeder, cryptocoin: state.cryptocoin }),
+connect(state => ({ user: state.user, seeder: state.seeder, cryptocoin: state.cryptocoin, wallet: state.wallet }),
 	dispatch => ({
 		listRandom: () => dispatch(seederActions.listRandom()),
-		create: (data) => dispatch(cryptocoinActions.create(data))
+		create: (data) => dispatch(cryptocoinActions.create(data)),
+		listWallet: () => dispatch(walletActions.listWallet())
 	})
 )(Wallet);

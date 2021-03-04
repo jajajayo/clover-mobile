@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/dist/Feather'
 
 import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
 import { userActions } from '../../../src/redux/user/actions'
+import { walletActions } from '../../../src/redux/wallet/actions'
 import CardWallet from '../../components/CardWallet'
 import ListCard from '../../components/ListCard'
 import MyTextInput from '../../components/MyTextInput'
@@ -18,13 +19,17 @@ class Wallet extends Component {
 		super(props);
 		this.state = {
 			cryptocoins: [],
-			userCryptocoins: []
+			userCryptocoins: [],
+			wallet: []
 		}
 		this.showToast = this.props.route.params.showToast
 	}
 
 	async componentDidMount() {
 		await this.props.getListCryptocoins()
+		await this.props.listWallet()
+
+		console.log(this.props.wallet)
 		
 		if (this.props.cryptocoin.payload.success) {
 			this.setWallet()
@@ -48,6 +53,7 @@ class Wallet extends Component {
 					const ifExists = userCryptocoins.find(ele => ele.idCryptocoin == cryptocoin._id)
 					if (ifExists) {
 						cryptocoin.walletUser = ifExists.wallet
+						cryptocoin.amount = ifExists.amount
 					}
 				})
 			}
@@ -63,7 +69,7 @@ class Wallet extends Component {
 	}
 
 	render() {
-		console.log(this.props.balance.payload)
+		const wallet = (this.props.wallet.payload?.success) ? this.props.wallet.payload?.data : []
 		return (
 			<Container>
 				<Content contentContainerStyle={{paddingTop:'10%'}}>
@@ -83,15 +89,13 @@ class Wallet extends Component {
 						</View>
 					</View>
 
-					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>${(this.props.balance.payload) ? this.props.balance.payload.toFixed(2) : 0.00}</Text>
+					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>${(this.props.balance.payload) ? this.props.balance.payload?.toFixed(2) : '0.00'}</Text>
 					<Text style={{fontSize:24, color:'gray', padding:10, marginLeft:10}}>{I18n.t('wallet.title')}</Text>
 
 					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.walletSelect('addWallet')} />
-					{this.state.cryptocoins && this.state.cryptocoins?.length > 0 &&
-						this.state.cryptocoins.map((cryptocoin, index) => {
-							if (cryptocoin.walletUser) {
-								return <CardWallet key={index} data={cryptocoin} />
-							}
+					{wallet && wallet?.length > 0 &&
+						wallet.map((cryptocoin, index) => {
+							return <CardWallet key={index} data={cryptocoin} />
 						})
 					}
 				</Content>
@@ -154,9 +158,10 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, cryptocoin: state.cryptocoin, balance: state.balance }),
+connect(state => ({ user: state.user, cryptocoin: state.cryptocoin, balance: state.balance, wallet: state.wallet }),
 	dispatch => ({
 		getListCryptocoins: () => dispatch(cryptocoinActions.list()),
-		getLocalData: () => dispatch(userActions.getLocalData())
+		getLocalData: () => dispatch(userActions.getLocalData()),
+		listWallet: () => dispatch(walletActions.listWallet())
 	})
 )(Wallet);

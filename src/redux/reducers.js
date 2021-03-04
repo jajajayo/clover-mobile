@@ -9,6 +9,7 @@ import contact from './contact/reducers'
 import seeder from './seeder/reducers'
 import transaction from './transaction/reducers'
 import balance from './balance/reducers'
+import wallet from './wallet/reducers'
 
 export default combineReducers({
 	i18n: i18nReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
 	contact,
 	seeder,
 	transaction,
-	balance
+	balance,
+	wallet
 })

@@ -4,6 +4,7 @@ import { Container, Content, Footer, Thumbnail } from 'native-base';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 import Icon from 'react-native-vector-icons/dist/Feather'
+import Config from 'react-native-config'
 import Toast from '../../helpers/Toast'
 
 import { validate } from './Validate'
@@ -18,7 +19,7 @@ class Wallet extends Component {
 		this.state = {
 			selectedCryptocoin: this.props.route.params?.selectedCryptocoin,
 			amount: '',
-			walletReceive: this.props.route.params?.selectedCryptocoin.walletUser,
+			walletReceive: this.props.route.params?.selectedCryptocoin.wallet,
 		}
 	}
 
@@ -49,7 +50,7 @@ class Wallet extends Component {
 				<Content contentContainerStyle={{paddingTop:'8%'}} padder>
 					{/*<Text style={{fontSize:16,color:'gray', textAlign:'center', padding:10}}>{I18n.t('wallet.subTitleSeeder')}</Text>*/}
 					<View style={{flexDirection:'row', alignItems:'center'}}>
-						<Thumbnail style={{}} small source={{uri: 'http://192.168.1.20:4007/public/'+selectedCryptocoin.image}} />
+						<Thumbnail style={{}} small source={{uri: `${Config.URI_PUBLIC}/${selectedCryptocoin.image}`}} />
 						<Text style={{fontSize:26, marginLeft:10}}>{`${selectedCryptocoin.name} (${selectedCryptocoin.shortName})`}</Text>
 					</View>
 					<Text style={{marginTop:20}}>{selectedCryptocoin.walletUser}</Text>

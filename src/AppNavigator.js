@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {connect} from 'react-redux'
 import {I18n} from 'react-redux-i18n'
+import store from './redux/store'
 
 import TabNavigator from './TabNavigator'
 import Login from './containers/Login/Login'
@@ -14,6 +15,26 @@ import LoadingModal from './components/LoadingModal'
 import WalletSeeder from './containers/Wallet/WalletSeeder'
 import WalletSelect from './containers/Wallet/WalletSelect'
 import WalletSend from './containers/Wallet/WalletSend'
+import {io} from 'socket.io-client'
+const socket = io.connect(`ws://200.93.126.98:4010`, { 'forceNew': true, 'reconnection': false });
+
+socket.on("connect", () => {
+	console.log('conectado al socket que emite el monto')
+});
+
+socket.on('update-balance', async function (data) {
+	console.log('recibo: ', data)
+	const wallet = store.getState().wallet?.payload?.data
+	console.log('wallet', wallet)
+	if (wallet?.length > 0) {
+		await Promise.all(wallet.map(w => {
+			if (w._id.toString() == data.idCryptocoin.toString()) {
+				w.amount = parseFloat(w.amount) + parseFloat(data.amount)
+			}
+		}))
+		store.dispatch({type:'SUCCESS_WALLET', payload: {success: true, data: wallet}})
+	}
+})
 
 const Stack = createStackNavigator();
 
@@ -42,10 +63,12 @@ class AppNavigator extends Component {
 		const cryptocoin = this.props.cryptocoin.isLoading
 		const contact = this.props.contact.isLoading
 		const transaction = this.props.transaction.isLoading
+		const seeder = this.props.seeder.isLoading
+		const wallet = this.props.wallet.isLoading
 		
 		return (
 			<>
-				{(user || cryptocoin || contact || transaction) &&
+				{(user || cryptocoin || contact || transaction || seeder || wallet) &&
 					<LoadingModal />
 				}
 				<NavigationContainer screenProps={{test: this.test}}>
@@ -77,5 +100,7 @@ export default
 		user: state.user,
 		cryptocoin: state.cryptocoin,
 		contact: state.contact,
-		transaction: state.transaction
+		transaction: state.transaction,
+		seeder: state.seeder,
+		wallet: state.wallet
 	}))(AppNavigator)
