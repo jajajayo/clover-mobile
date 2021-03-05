@@ -22,13 +22,13 @@ export const transactionActions = {
 		return async dispatch => {
 			await dispatch({type:transactionActionType.SEND_TRANSACTION,payload:{}})
 			//const transaction = await axiosOrig.post(`${Config.URI_TRANSACTION}/transaction/broadcast`, {
-			/*const transaction = await axiosOrig.post(`http://192.168.1.3:3001/transaction/broadcast`, {
+			const transaction = await axiosOrig.post(`https://blockchain-clover.herokuapp.com/transaction/broadcast`, {
 				amount: _data.amount,
 				recipient: _data.walletReceive,
 				sender: _data.wallet
-			})*/
-			if (/*transaction?.data?.transaction?.id*/1==1) {
-				const {data} = await axios.post('transaction/send', {..._data, idTransaction:/*transaction.data?.transaction?.id*/1})
+			})
+			if (transaction?.data?.transaction?.id) {
+				const {data} = await axios.post('transaction/send', {..._data, idTransaction:transaction.data?.transaction?.id})
 				if (data.success) {
 					await dispatch({ type: transactionActionType.SUCCESS_TRANSACTION, payload: data })
 				} else {

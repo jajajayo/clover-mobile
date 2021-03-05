@@ -2,7 +2,7 @@ import axios from 'axios'
 import Config from 'react-native-config'
 //import AsyncStorage from '@react-native-community/async-storage'
 
-//axios.defaults.baseURL = 'http://192.168.1.20:4007/api/';
+//axios.defaults.baseURL = 'http://192.168.1.3:4000/api/';
 axios.defaults.baseURL = Config.URI_API
 
 axios.interceptors.response.use(

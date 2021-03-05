@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {connect} from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 import store from './redux/store'
+import Config from 'react-native-config'
 
 import TabNavigator from './TabNavigator'
 import Login from './containers/Login/Login'
@@ -16,7 +17,7 @@ import WalletSeeder from './containers/Wallet/WalletSeeder'
 import WalletSelect from './containers/Wallet/WalletSelect'
 import WalletSend from './containers/Wallet/WalletSend'
 import {io} from 'socket.io-client'
-const socket = io.connect(`ws://200.93.126.98:4010`, { 'forceNew': true, 'reconnection': false });
+const socket = io.connect(`${Config.WS}`, { 'forceNew': true, 'reconnection': false });
 
 socket.on("connect", () => {
 	console.log('conectado al socket que emite el monto')
