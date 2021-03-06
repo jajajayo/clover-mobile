@@ -16,6 +16,7 @@ import LoadingModal from './components/LoadingModal'
 import WalletSeeder from './containers/Wallet/WalletSeeder'
 import WalletSelect from './containers/Wallet/WalletSelect'
 import WalletSend from './containers/Wallet/WalletSend'
+import WalletReceive from './containers/Wallet/WalletReceive'
 import {io} from 'socket.io-client'
 const socket = io.connect(`${Config.WS}`, { 'forceNew': true, 'reconnection': false });
 
@@ -89,6 +90,7 @@ class AppNavigator extends Component {
 						<Stack.Screen name="WalletSeeder" component={WalletSeeder} options={{ title: I18n.t('wallet.titleSeeder') }} initialParams={{showToast: this.showToast}} />
 						<Stack.Screen name="WalletSelect" component={WalletSelect} options={{ title: I18n.t('wallet.selectACryptocoin') }} />
 						<Stack.Screen name="WalletSend" component={WalletSend} options={{ title: I18n.t('send') }} />
+						<Stack.Screen name="WalletReceive" component={WalletReceive} options={{ title: I18n.t('wallet.receive') }} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</>

@@ -23,11 +23,11 @@ class Options extends Component {
 			<Container>
 				<Content contentContainerStyle={{paddingTop:'20%'}}>
 
-					<ListCard icon='user' iconColor='green' title={I18n.t('userOptions.updateProfile')} onPress={() => this.props.navigation.navigate('UserUpdate')} />
-					<ListCard icon='help-circle' iconColor='green' title={I18n.t('userOptions.help')} />
-					<ListCard icon='file' iconColor='green' title={I18n.t('userOptions.terms')} />
-					<ListCard icon='more-horizontal' iconColor='green' title={I18n.t('userOptions.contactUs')} />
-					<ListCard icon='log-out' iconColor='green' title={I18n.t('userOptions.logout')} onPress={() => this.logout()} />
+					<ListCard icon='user' iconColor='#49CC68' title={I18n.t('userOptions.updateProfile')} onPress={() => this.props.navigation.navigate('UserUpdate')} />
+					<ListCard icon='help-circle' iconColor='#49CC68' title={I18n.t('userOptions.help')} />
+					<ListCard icon='file' iconColor='#49CC68' title={I18n.t('userOptions.terms')} />
+					<ListCard icon='more-horizontal' iconColor='#49CC68' title={I18n.t('userOptions.contactUs')} />
+					<ListCard icon='log-out' iconColor='#49CC68' title={I18n.t('userOptions.logout')} onPress={() => this.logout()} />
 
 				</Content>
 			</Container>

@@ -18,6 +18,8 @@ export const languages = {
 		delete: 'Eliminar',
 		copy: 'Copiar',
 		showQR: 'Mostrar QR',
+		setQuantity: 'Fijar Cantidad',
+		share: 'Compartir',
 		tab: {
 			home: 'Home',
 			contacts: 'Contactos',
@@ -102,7 +104,10 @@ export const languages = {
 			amount: 'Cantidad',
 			addressee: 'Destinatario',
 			sendSuccess: 'Se ha realizado la transacción exitosamente',
-			sendFailed: 'Ha ocurrido un error con la transacción'
+			sendFailed: 'Ha ocurrido un error con la transacción',
+			sendOnly: 'Envíe sólo',
+			toThisAddress: 'a esta dirección. El envío de cualquier otra moneda puede resultar en una pérdida permanente.',
+			copyToClipboard: 'Clave copiada al portapapeles'
 		}
 	},
 	en: {
@@ -123,6 +128,8 @@ export const languages = {
 		delete: 'Delete',
 		copy: 'Copy',
 		showQR: 'Show QR',
+		setQuantity: 'Set Quantity',
+		share: 'Share',
 		tab: {
 			home: 'Home',
 			contacts: 'Contacts',
@@ -207,7 +214,10 @@ export const languages = {
 			amount: 'Amount',
 			addressee: 'Addressee',
 			sendSuccess: 'The transaction has been carried out successfully',
-			sendFailed: 'An error occurred with the transaction'
+			sendFailed: 'An error occurred with the transaction',
+			sendOnly: 'Envíe sólo',
+			toThisAddress: 'a esta dirección. El envío de cualquier otra moneda puede resultar en una pérdida permanente.',
+			copyToClipboard: 'Key copied to clipboard'
 		}
 	}
 }

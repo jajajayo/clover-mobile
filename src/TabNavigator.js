@@ -53,7 +53,7 @@ class TabNavigator extends Component {
 					}
 				})}
 				tabBarOptions={{
-					activeTintColor: 'green',
+					activeTintColor: '#49CC68',
 					inactiveTintColor: 'gray',
 					//inactiveBackgroundColor: '#0C6393',
 					//activeBackgroundColor: '#1E85EB',

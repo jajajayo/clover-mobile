@@ -19,8 +19,8 @@ class MyButton extends Component {
 			<View style={[styles.container, props.containerStyle ? props.containerStyle : {}]} >
 				<Button 
 					full
-					style={styles.button}
 					success={props.success ? props.success : false}
+					style={[styles.button, (props.success) ? {backgroundColor: '#49CC68'} : {}]}
 					bordered={props.bordered ? props.bordered : false}
 					{...props} 
 				>

@@ -29,6 +29,10 @@ class WalletSelect extends Component {
 			this.props.navigation.navigate('WalletSend', {
 				selectedCryptocoin: cryptocoin
 			})
+		} else if (this.props.route.params.typeOperation == 'receive') {
+			this.props.navigation.navigate('WalletReceive', {
+				selectedCryptocoin: cryptocoin
+			})
 		}
 	}
 

@@ -10,8 +10,7 @@ class MyTextInput extends Component {
 		this.state = {}
 	}
 
-	async componentDidMount() {
-	}
+	async componentDidMount() {}
 
 	render() {
 		return (
@@ -21,7 +20,7 @@ class MyTextInput extends Component {
 				</View>
 				{this.props.icon &&
 					<View style={{width:'15%', alignItems:'center'}}>
-						<Icon name={this.props.icon} style={{fontSize:30, color: this.props.iconColor ? this.props.iconColor : 'green'}} />
+						<Icon name={this.props.icon} style={{fontSize:30, color: this.props.iconColor ? this.props.iconColor : '#49CC68'}} />
 					</View>
 				}
 			</View>
@@ -36,13 +35,13 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		borderWidth: 1,
 		borderRadius: 30,
-		borderColor: 'green',
+		borderColor: '#49CC68',
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
 	textInput: {
 		paddingLeft: 15,
-		color: 'green',
+		color: '#49CC68',
 		fontSize: 18
 	}
 });

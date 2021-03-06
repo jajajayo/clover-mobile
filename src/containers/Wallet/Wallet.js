@@ -82,17 +82,17 @@ class Wallet extends Component {
 							<Text style={{fontSize:20}}>{I18n.t('wallet.send')}</Text>
 						</View>
 						<View style={{width:'50%', alignItems:'center'}}>
-							<TouchableOpacity style={styles.arrow}>
+							<TouchableOpacity style={styles.arrow} onPress={() => this.walletSelect('receive')}>
 								<Icon name='arrow-down' size={70} color='white' />
 							</TouchableOpacity>
 							<Text style={{fontSize:20}}>{I18n.t('wallet.receive')}</Text>
 						</View>
 					</View>
 
-					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>${(this.props.balance.payload) ? this.props.balance.payload?.toFixed(2) : '0.00'}</Text>
+					<Text style={{fontSize:36, padding:10, textAlign:'center', paddingTop:0}}>${'0.00'}</Text>
 					<Text style={{fontSize:24, color:'gray', padding:10, marginLeft:10}}>{I18n.t('wallet.title')}</Text>
 
-					<ListCard icon='plus' iconColor='green' title={I18n.t('wallet.addWallet')} onPress={() => this.walletSelect('addWallet')} />
+					<ListCard icon='plus' iconColor='#49CC68' title={I18n.t('wallet.addWallet')} onPress={() => this.walletSelect('addWallet')} />
 					{wallet && wallet?.length > 0 &&
 						wallet.map((cryptocoin, index) => {
 							return <CardWallet key={index} data={cryptocoin} />
@@ -134,13 +134,13 @@ const styles = StyleSheet.create({
 	},
 	modalTop: {
 		borderBottomWidth: 4, 
-		borderColor: 'green', 
+		borderColor: '#49CC68', 
 		marginTop: 10, 
 		width:'40%', 
 		alignSelf:'center'
 	},
 	arrow: {
-		backgroundColor: 'green',
+		backgroundColor: '#49CC68',
 		alignItems: 'center',
 		justifyContent: 'center',
 		borderRadius: 90,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 	},
 	addWallet: {
 		borderRadius: 6,
-		backgroundColor: 'green',
+		backgroundColor: '#49CC68',
 		padding: 10,
 		alignSelf:'flex-end',
 		flexDirection:'row',

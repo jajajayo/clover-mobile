@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
 	},
 	modalTop: {
 		borderBottomWidth: 4, 
-		borderColor: 'green', 
+		borderColor: '#49CC68', 
 		marginTop: 10, 
 		width:'40%', 
 		alignSelf:'center'
