@@ -35,7 +35,7 @@ class Wallet extends Component {
 			await this.props.send({
 				...sendData,
 				idCryptocoin: this.state.selectedCryptocoin._id,
-				wallet: this.state.selectedCryptocoin.walletUser
+				wallet: this.state.selectedCryptocoin.wallet
 			})
 			if (this.props.transaction.payload.success) {
 				this.props.navigation.popToTop()
