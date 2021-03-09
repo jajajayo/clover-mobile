@@ -20,7 +20,7 @@ class MyButton extends Component {
 				<Button 
 					full
 					success={props.success ? props.success : false}
-					style={[styles.button, (props.success) ? {backgroundColor: '#49CC68'} : {}]}
+					style={[styles.button, (props.success && !props.bordered) ? {backgroundColor: '#49CC68'} : {}]}
 					bordered={props.bordered ? props.bordered : false}
 					{...props} 
 				>

@@ -28,7 +28,8 @@ class Wallet extends Component {
 	send = async () => {
 		const sendData = {
 			amount: Number(this.state.amount),
-			walletReceive: this.state.walletReceive
+			walletReceive: this.state.walletReceive,
+			listTransactions: JSON.stringify(this.props.transaction.payload.data)
 		}
 		const errors = validate(sendData)
 		if (errors.length == 0) {

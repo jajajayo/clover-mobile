@@ -107,7 +107,7 @@ class Login extends Component {
 					<Text style={styles.title}>{I18n.t('login.title')}</Text>
 					
 					<MyTextInput onChangeText={(email) => this.setState({ email })} keyboardType={'email-address'} autoCapitalize={'none'} placeholder={I18n.t('email')} />
-					<MyTextInput onChangeText={(password) => this.setState({ password })} placeholder={I18n.t('password')} />
+					<MyTextInput onChangeText={(password) => this.setState({ password })} placeholder={I18n.t('password')} secureTextEntry autoCorrect={false} />
 
 					<MyButton containerStyle={{marginTop: 20}} success onPress={this.loginUser} text={I18n.t('login.title')} />
 

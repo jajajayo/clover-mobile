@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { userActions } from '../redux/user/actions'
 import { countryActions } from '../redux/country/actions'
+import { transactionActions } from '../redux/transaction/actions'
 import AppNavigator from '../AppNavigator';
 
 class SplashScreen extends Component {
@@ -19,6 +20,7 @@ class SplashScreen extends Component {
 	async componentDidMount() {
 		await this.props.getLocalData()
 		await this.props.getListCountries()
+		//await this.props.getListTransactions()
 		if (this.props.user.localData) {
 			this.setState({
 				showNavigation: true,
@@ -110,6 +112,7 @@ export default
 	}),
 	dispatch => ({
 		getLocalData:() => dispatch(userActions.getLocalData()),
-		getListCountries: () => dispatch(countryActions.list())
+		getListCountries: () => dispatch(countryActions.list()),
+		getListTransactions: (data) => dispatch(transactionActions.list(data))
 	})
 )(SplashScreen);
