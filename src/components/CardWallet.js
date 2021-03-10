@@ -19,11 +19,11 @@ class CardWallet extends Component {
 						<Image source={{uri: `${Config.URI_PUBLIC}/${data.image}`}} style={styles.avatar} />
 					}
 				</View>
-				<View style={{flex:5, paddingLeft:25}}>
+				<View style={{flex:3, paddingLeft:25}}>
 					<Text style={styles.title} >{data.name}</Text>
 					<Text style={styles.subtitle} >$35,000.00 <Text style={{color:'green'}}> +0.26%</Text></Text>
 				</View>
-				<View style={{flex:2, alignItems:'flex-end'}}>
+				<View style={{flex:3, alignItems:'flex-end'}}>
 					<Text style={styles.title} >{data.amount} {data.shortName}</Text>
 					<Text style={styles.subtitle} >$0.00</Text>
 				</View>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 		color: 'white'
 	},
 	title: {
-		fontSize: 22, 
+		fontSize: 20, 
 		color: 'black'
 	},
 	subtitle: {

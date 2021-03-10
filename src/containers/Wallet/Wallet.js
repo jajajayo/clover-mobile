@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/dist/Feather'
 import { cryptocoinActions } from '../../../src/redux/cryptocoin/actions'
 import { userActions } from '../../../src/redux/user/actions'
 import { walletActions } from '../../../src/redux/wallet/actions'
+import { transactionActions } from '../../../src/redux/transaction/actions'
 import CardWallet from '../../components/CardWallet'
 import ListCard from '../../components/ListCard'
 import MyTextInput from '../../components/MyTextInput'
@@ -28,8 +29,7 @@ class Wallet extends Component {
 	async componentDidMount() {
 		await this.props.getListCryptocoins()
 		await this.props.listWallet()
-
-		console.log(this.props.wallet)
+		await this.props.getListTransactions()
 		
 		if (this.props.cryptocoin.payload.success) {
 			this.setWallet()
@@ -158,10 +158,11 @@ const styles = StyleSheet.create({
 });
 
 export default
-connect(state => ({ user: state.user, cryptocoin: state.cryptocoin, balance: state.balance, wallet: state.wallet }),
+connect(state => ({ user: state.user, cryptocoin: state.cryptocoin, balance: state.balance, wallet: state.wallet, transaction: state.transaction }),
 	dispatch => ({
 		getListCryptocoins: () => dispatch(cryptocoinActions.list()),
 		getLocalData: () => dispatch(userActions.getLocalData()),
-		listWallet: () => dispatch(walletActions.listWallet())
+		listWallet: () => dispatch(walletActions.listWallet()),
+		getListTransactions: (data) => dispatch(transactionActions.list(data))
 	})
 )(Wallet);

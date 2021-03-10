@@ -105,7 +105,7 @@ class Register extends Component {
 					<MyPhoneInput setPhone={this.setPhone} value={this.state.numberPhone} />
 
 					<MyTextInput onChangeText={(v) => this.setState({ referredUser:v })} placeholder={I18n.t('register.referredUser')} />
-					<MyTextInput onChangeText={(v) => this.setState({ password:v })} placeholder={I18n.t('password')} />
+					<MyTextInput onChangeText={(v) => this.setState({ password:v })} placeholder={I18n.t('password')} secureTextEntry autoCorrect={false} />
 
 					<View style={{flexDirection:'row', marginTop:30, alignSelf:'center'}}>
 						<Image style={{...styles.social, marginRight:10}} source={require('../../assets/facebook.png')} />

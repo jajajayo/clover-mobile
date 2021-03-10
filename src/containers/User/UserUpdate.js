@@ -71,7 +71,7 @@ class UserUpdate extends Component {
 
 					<MyPhoneInput setPhone={this.setPhone} value={this.state.numberPhone} />
 
-					<MyTextInput onChangeText={(v) => this.setState({ password:v })} placeholder={I18n.t('userUpdate.newPassword')} />
+					<MyTextInput onChangeText={(v) => this.setState({ password:v })} placeholder={I18n.t('userUpdate.newPassword')} secureTextEntry autoCorrect={false} />
 
 					<MyButton containerStyle={{marginTop: 20}} success onPress={this.update} text={I18n.t('saveChanges')} />
 					<MyLink onPress={() => this.props.navigation.goBack()} text={I18n.t('cancel')} containerStyle={{marginTop: 5, alignSelf:'center'}} />

@@ -108,6 +108,15 @@ export const languages = {
 			sendOnly: 'Envíe sólo',
 			toThisAddress: 'a esta dirección. El envío de cualquier otra moneda puede resultar en una pérdida permanente.',
 			copyToClipboard: 'Clave copiada al portapapeles'
+		},
+		activity: {
+			title: 'Actividad',
+			detail: 'Detalles de la transacción',
+			idTransaction: 'ID Transacción',
+			cryptocoin: 'Criptomoneda',
+			amount: 'Monto',
+			date: 'Fecha',
+			userReceive: 'Usuario'
 		}
 	},
 	en: {
@@ -218,6 +227,15 @@ export const languages = {
 			sendOnly: 'Envíe sólo',
 			toThisAddress: 'a esta dirección. El envío de cualquier otra moneda puede resultar en una pérdida permanente.',
 			copyToClipboard: 'Key copied to clipboard'
+		},
+		activity: {
+			title: 'Activity',
+			detail: 'Details of the transaction',
+			idTransaction: 'ID Transaction',
+			cryptocoin: 'Cryptocoin',
+			amount: 'Amount',
+			date: 'Date',
+			userReceive: 'User Receive'
 		}
 	}
 }

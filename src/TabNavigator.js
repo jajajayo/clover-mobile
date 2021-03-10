@@ -10,6 +10,7 @@ import {I18n} from 'react-redux-i18n'
 import UnderConstruction from './containers/UnderConstruction'
 import Wallet from './containers/Wallet/Wallet'
 import Contact from './containers/Contact/Contact'
+import Activity from './containers/Activity/Activity'
 import Options from './containers/Options/Options'
 
 const Tab = createBottomTabNavigator();
@@ -66,8 +67,8 @@ class TabNavigator extends Component {
 			>
 				<Tab.Screen name="Home" component={Wallet} options={{title: I18n.t('tab.home')}} initialParams={{showToast: this.showToast}} />
 				<Tab.Screen name="Contacts" component={Contact} options={{title: I18n.t('tab.contacts')}} initialParams={{showToast: this.showToast}}/>
-				<Tab.Screen name="Activity" component={UnderConstruction} options={{title: I18n.t('tab.activity')}} />
-				<Tab.Screen name="Transfer" component={UnderConstruction} options={{title: I18n.t('tab.transfer')}} />
+				<Tab.Screen name="Activity" component={Activity} options={{title: I18n.t('tab.activity')}} />
+				{/*<Tab.Screen name="Transfer" component={UnderConstruction} options={{title: I18n.t('tab.transfer')}} />*/}
 				<Tab.Screen name="Options" component={Options} options={{title: I18n.t('tab.options')}} />
 			</Tab.Navigator>
 		)
