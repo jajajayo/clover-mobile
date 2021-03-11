@@ -4,6 +4,7 @@ import { Container, Content } from 'native-base';
 import { connect } from 'react-redux'
 import {I18n} from 'react-redux-i18n'
 
+
 import { validate } from './Validate'
 import { userActions } from '../../../src/redux/user/actions'
 import MyTextInput from '../../components/MyTextInput'
@@ -24,9 +25,19 @@ class Register extends Component {
 			referredUser: '',
 			password: '',
 			countries: (this.props.country.payload) ? this.props.country.payload.data : [],
-			idCountry: ''
+			idCountry: '',
+			cca2: 'US',
+			showModal: false
 		}
+		this.onPressFlag = this.onPressFlag.bind(this);
+		this.selectCountry = this.selectCountry.bind(this);
 		this.showToast = this.props.route.params.showToast
+	}
+
+	componentDidMount() {
+		this.setState({
+			pickerData: this.phone.getPickerData(),
+		});
 	}
 
 	create = async () => {
@@ -90,6 +101,16 @@ class Register extends Component {
 	}
 
 	setPhone = (ref) => this.phone = ref;
+	getPhone = () => this.phone;
+
+	onPressFlag() {
+		this.setState({showModal: true})
+	}
+
+	selectCountry(country) {
+		this.phone.selectCountry(country.cca2.toLowerCase());
+		this.setState({ cca2: country.cca2, showModal: false });
+	}
 
 	render() {
 		return (
@@ -102,7 +123,7 @@ class Register extends Component {
 
 					<MyPicker values={this.state.countries} keyLabel='_id' keyValue='name' callback={this.setCountry} selectedValue={this.state.idCountry} />
 
-					<MyPhoneInput setPhone={this.setPhone} value={this.state.numberPhone} />
+					<MyPhoneInput setPhone={this.setPhone} getPhone={this.getPhone} value={this.state.numberPhone} />
 
 					<MyTextInput onChangeText={(v) => this.setState({ referredUser:v })} placeholder={I18n.t('register.referredUser')} />
 					<MyTextInput onChangeText={(v) => this.setState({ password:v })} placeholder={I18n.t('password')} secureTextEntry autoCorrect={false} />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native'
 import { Toast } from 'native-base'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconFE from 'react-native-vector-icons/Feather'
@@ -40,16 +41,42 @@ class TabNavigator extends Component {
 			<Tab.Navigator
 				screenOptions={({ route }) => ({
 					tabBarIcon: ({ focused, color, size }) => {
+						const styles = {width:20, height:20, resizeMode:'contain'}
 						if (route.name === 'Home') {
-							return <IconFA name='home' size={20} color={color} style={{marginTop:3}} />;
+							if (focused) {
+								return <Image source={require('./assets/icons/home2.png')} style={styles} />
+							} else {
+								return <Image source={require('./assets/icons/home.png')} style={styles} />
+							}
+							//return <IconFA name='home' size={20} color={color} style={{marginTop:3}} />;
 						} else if (route.name === 'Options') {
-							return <IconFE name='settings' size={20} color={color} style={{marginTop:3}} />;
+							if (focused) {
+								return <Image source={require('./assets/icons/opciones2.png')} style={styles} />
+							} else {
+								return <Image source={require('./assets/icons/opciones.png')} style={styles} />
+							}
+							//return <IconFE name='settings' size={20} color={color} style={{marginTop:3}} />;
 						} else if (route.name === 'Contacts') {
-							return <IconFA name='address-book-o' size={20} color={color} style={{marginTop:3}} />;
+							if (focused) {
+								return <Image source={require('./assets/icons/contactos2.png')} style={styles} />
+							} else {
+								return <Image source={require('./assets/icons/contactos.png')} style={styles} />
+							}
+							//return <IconFA name='address-book-o' size={20} color={color} style={{marginTop:3}} />;
 						} else if (route.name === 'Activity') {
-							return <IconFE name='bar-chart' size={20} color={color} style={{marginTop:3}} />;
+							if (focused) {
+								return <Image source={require('./assets/icons/actividad2.png')} style={styles} />
+							} else {
+								return <Image source={require('./assets/icons/actividad.png')} style={styles} />
+							}
+							//return <IconFE name='bar-chart' size={20} color={color} style={{marginTop:3}} />;
 						} else if (route.name === 'Transfer') {
-							return <IconFE name='list' size={20} color={color} style={{marginTop:3}} />;
+							if (focused) {
+								return <Image source={require('./assets/icons/home2.png')} style={styles} />
+							} else {
+								return <Image source={require('./assets/icons/home.png')} style={styles} />
+							}
+							//return <IconFE name='list' size={20} color={color} style={{marginTop:3}} />;
 						}
 					}
 				})}
